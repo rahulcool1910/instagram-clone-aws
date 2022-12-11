@@ -1,0 +1,12 @@
+npm init -y
+
+change the type to module in package.json
+
+yarn add express
+
+create index.js file
+
+node index.js
+
+https://towardsdatascience.com/deploying-a-docker-container-with-ecs-and-fargate-7b0cbc9cd608
+
