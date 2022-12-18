@@ -1,9 +1,12 @@
 import express from 'express'
+import serverless from "serverless-http";
 const app = express();
+app.use(express.static(path.join(__dirname, "js")));
 const port = 3000;
 import http from 'http';
 const server = http.createServer(app);
 import { Server } from "socket.io";
+import path from 'path';
 const io = new Server(server, {
   cors: {
     origin: '*'
@@ -41,6 +44,9 @@ io.on('connection', (socket) => {
 //   // });
 // });
 
-server.listen(3000, () => {
-  console.log('listening on *:3000');
-});
+// server.listen(3000, () => {
+//   console.log('listening on *:3000');
+// });
+
+
+export const handler = serverless(app);

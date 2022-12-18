@@ -1,0 +1,106 @@
+service: instagram
+frameworkVersion: '3'
+
+
+custom:
+  # Our stage is based on what is passed in when running serverless
+  # commands. Or falls back to what we have set in the provider section.
+  stage: ${opt:stage, 'offline'}
+  region: ${opt:region, 'us-east-1'}
+  bundle:
+    linting: false
+  serverless-offline:
+    httpPort: 4000
+    noPrependStageInUrl: true
+    reloadHandler: true
+plugins:
+  - serverless-offline
+  - serverless-bundle
+
+functions:
+  api:
+    handler: index.handler
+    events:
+      - httpApi: '*'
+
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  # # (required) similar to Lambda-containers, images defined within the provider are available to tasks.
+  # ecr:
+  #   images:
+  #     test-socket-v2:
+  #       path: ./
+  #       file: Dockerfile
+
+  # fargate:
+  #   clusterName: test-socket-2
+  #   containerInsights: true
+
+  #   memory: '0.5GB'
+  #   cpu: 256
+  #   architecture: X86_64
+
+  #   logRetentionInDays: 365
+
+
+  #   iamRoleStatements:
+  #     - Effect: Allow
+  #       Action: 'resource:*'
+  #       Resource: '*'
+
+
+
+  #   vpc:
+  #     securityGroupIds:
+  #       - sg-12345
+
+  #     subnetIds:
+  #       - subnet-059a123cb50ff161c
+  #     assignPublicIp: true
+  #     tags:
+  #       created_by: rahul.r@presidio.com
+  #   tasks:
+  #     test-socket-2:
+  #       name: test-socket-2
+  #       image: test-socket-v2
+  #       vpc:
+  #         securityGroupIds:
+  #           - sg-12345
+  #         subnetIds:
+  #             - subnet-059a123cb50ff161c
+  #         assignPublicIp: true
+  #       memory: '0.5GB'
+  #       cpu: 256
+  #       service:
+  #         desiredCount: 1
+  #         maximumPercent: 200
+  #         minimumHealthyPercent: 100
+  #         spot: false
+
+
+Resources:
+  LogicalID:
+    Type: AWS::ECR::PublicRepository
+    Properties: 
+      RepositoryCatalogData: 
+          AboutText: String
+          Architectures: 
+            - String
+          OperatingSystems: 
+            - String
+          RepositoryDescription: String
+          UsageText: String
+
+      RepositoryName: String
+      RepositoryPolicyText: Json
+      Tags: 
+        - Tag
+
+
+
+
+
+
+  
