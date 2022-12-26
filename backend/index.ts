@@ -1,6 +1,11 @@
 import express from 'express'
 import serverless from "serverless-http";
 const app = express();
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 app.use(express.static(path.join(__dirname, "js")));
 const port = 3000;
 import http from 'http';
@@ -44,9 +49,9 @@ io.on('connection', (socket) => {
 //   // });
 // });
 
-// server.listen(3000, () => {
-//   console.log('listening on *:3000');
-// });
+server.listen(3000, () => {
+  console.log('listening on *:3000');
+});
 
 
 export const handler = serverless(app);
