@@ -1,0 +1,60 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-poctest-dev-200052-authRole",
+      "UnauthRoleArn": "arn:aws:iam::877969058937:role/amplify-poctest-dev-200052-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::877969058937:role/amplify-poctest-dev-200052-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-poctest-dev-200052-deployment",
+      "UnauthRoleName": "amplify-poctest-dev-200052-unauthRole",
+      "StackName": "amplify-poctest-dev-200052",
+      "StackId": "arn:aws:cloudformation:us-east-1:877969058937:stack/amplify-poctest-dev-200052/963197c0-7ee0-11ed-8bd8-0efc7f49ca19",
+      "AmplifyAppId": "dfojgjqycwb6y"
+    }
+  },
+  "auth": {
+    "poctestf27e0138": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "frontendAuthConfig": {
+        "socialProviders": [
+          "GOOGLE"
+        ],
+        "usernameAttributes": [],
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "output": {
+        "UserPoolId": "us-east-1_JYfyXP2o4",
+        "AppClientIDWeb": "3pubbk4bi3up6rtdn9jpdtm738",
+        "AppClientID": "40h4hjk43pqm7cog4n8049nr33",
+        "HostedUIDomain": "poctestf27e0138-f27e0138-dev",
+        "IdentityPoolId": "us-east-1:37fe123c-9834-4447-a68f-e2109636424c",
+        "UserPoolArn": "arn:aws:cognito-idp:us-east-1:877969058937:userpool/us-east-1_JYfyXP2o4",
+        "IdentityPoolName": "poctestf27e0138_identitypool_f27e0138__dev",
+        "OAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:19006/\"],\"LogoutURLs\":[\"http://localhost:19006/\"]}",
+        "UserPoolName": "poctestf27e0138_userpool_f27e0138"
+      },
+      "lastPushTimeStamp": "2022-12-19T09:23:14.451Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-poctest-dev-200052-deployment/amplify-cfn-templates/auth/poctestf27e0138-cloudformation-template.json",
+        "logicalId": "authpoctestf27e0138"
+      },
+      "lastPushDirHash": "dbwxwfErSA5+pcrXA7HJUCUycIQ="
+    }
+  }
+}

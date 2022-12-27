@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-poctest-dev-200052-authRole",
+      "UnauthRoleArn": "arn:aws:iam::877969058937:role/amplify-poctest-dev-200052-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::877969058937:role/amplify-poctest-dev-200052-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-poctest-dev-200052-deployment",
+      "UnauthRoleName": "amplify-poctest-dev-200052-unauthRole",
+      "StackName": "amplify-poctest-dev-200052",
+      "StackId": "arn:aws:cloudformation:us-east-1:877969058937:stack/amplify-poctest-dev-200052/963197c0-7ee0-11ed-8bd8-0efc7f49ca19",
+      "AmplifyAppId": "dfojgjqycwb6y"
+    },
+    "categories": {
+      "auth": {
+        "poctestf27e0138": {}
+      }
+    }
+  }
+}
