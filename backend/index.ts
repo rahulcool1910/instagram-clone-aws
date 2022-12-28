@@ -8,7 +8,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 app.use(express.static(path.join(__dirname, "js")));
 app.use(express.json())
+
 const port = 3000;
+
 import http from 'http';
 const server = http.createServer(app);
 import { Server } from "socket.io";
@@ -50,16 +52,23 @@ app.get('/get', async (req, res) => {
 });
 
 
-const map = new Map();
-io.on('connection', (socket) => {
+io.on('connection', async (socket) => {
   const { userName } = socket.handshake.auth
+
   console.log("🚀 ~ file: index.ts:23 ~ io.on ~ userName", userName)
-  map.set(userName, socket.id)
-  socket.on('chat_message', (msg) => {
+  await redis.set(userName, socket.id);
+  socket.on('chat_message', async (msg) => {
 
     const user = msg.userData;
     const message = msg.message;
-    io.to(map.get(user)).emit('chat_message', message)
+    const receiver = await redis.get(user)
+    if (!receiver) return;
+    console.log("🚀 ~ file: index.ts:65 ~ socket.on ~ receiver", receiver)
+    io.to(receiver).emit('chat_message', message)
+  });
+  socket.on('disconnect', async (data) => {
+    await redis.del(userName)
+    console.log('user disconnected', userName);
   });
 });
 
@@ -74,7 +83,7 @@ io.on('connection', (socket) => {
 //   // });
 // });
 
-server.listen(3000, () => {
+server.listen(port, () => {
   console.log('listening on *:3000');
 });
 

@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  Button as ReactButton,
   View,
 } from 'react-native';
 import { Button } from 'native-base';
@@ -20,6 +21,7 @@ import {
   NodeCallback,
 } from 'amazon-cognito-identity-js';
 import { Socket } from 'socket.io-client';
+
 const ListView = ({ navigation }) => {
   const [socket, setSocket] = useState<Socket>();
   const [userName, setUserName] = useState<string>('');
@@ -56,11 +58,15 @@ const ListView = ({ navigation }) => {
 
   const sendMessage = () => {
     const currentUser = (user.current as any).value;
-    // console.log(
-    //   '🚀 ~ file: Home.tsx:59 ~ sendMessage ~ currentUser',
-    //   currentUser
-    // );
+    console.log(
+      '🚀 ~ file: Home.tsx:59 ~ sendMessage ~ currentUser',
+      currentUser
+    );
     // console.log('🚀 ~ file: Home.tsx:60 ~ sendMessage ~ userName', userName);
+    console.log(
+      '🚀 ~ file: Home.tsx:70 ~ sendMessage ~  (input.current as any).value',
+      (input.current as any).value
+    );
     socket.emit('chat_message', {
       userData: currentUser,
       message: (input.current as any).value,
@@ -73,6 +79,7 @@ const ListView = ({ navigation }) => {
         <TextInput ref={user} style={styles.input} />
         <TextInput ref={input} style={styles.input} />
         <Button onPress={sendMessage}>send</Button>
+        {/* <ReactButton title="Sign Out" onPress={() => Auth.signOut()} /> */}
       </View>
     </NativeBaseProvider>
   );

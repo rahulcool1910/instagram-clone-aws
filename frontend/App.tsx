@@ -57,73 +57,25 @@ import { useEffect, useState } from 'react';
 import { Text, View, Linking, Button } from 'react-native';
 
 import { Amplify, Auth, Hub } from 'aws-amplify';
+import Login from './Components/Login';
 
 Amplify.configure(awsConfig);
 
 export default function App() {
-  const [user, setUser] = useState(null);
-  const [customState, setCustomState] = useState(null);
-
-  useEffect(() => {
-    const unsubscribe = Hub.listen('auth', ({ payload: { event, data } }) => {
-      switch (event) {
-        case 'signIn':
-          setUser(data);
-          break;
-        case 'signOut':
-          setUser(null);
-          break;
-        case 'customOAuthState':
-          setCustomState(data);
-      }
-    });
-
-    Auth.currentAuthenticatedUser()
-      .then((currentUser: CognitoUser) => {
-        setUser(currentUser);
-        console.log('🚀 ~ file: App.tsx:85 ~ .then ~ currentUser', currentUser);
-        currentUser.getUserAttributes((data) => {
-          console.log(
-            '🚀 ~ file: App.tsx:89 ~ currentUser.getUserData ~ data',
-            data
-          );
-        });
-        console.log(
-          '🚀 ~ file: App.tsx:89 ~ .then ~ currentUser.getUsername()',
-          currentUser.getUsername()
-        );
-      })
-      .catch(() => console.log('Not signed in'));
-
-    return unsubscribe;
-  }, []);
-
   return (
-    <View>
-      <Button
-        title="Open Amazon"
-        onPress={() =>
-          Auth.federatedSignIn({
-            provider: CognitoHostedUIIdentityProvider.Google,
-          })
-        }
-      />
-      <Button title="Open Hosted UI" onPress={() => Auth.federatedSignIn()} />
-      <Button title="Sign Out" onPress={() => Auth.signOut()} />
-      <pre>{JSON.stringify(user)}</pre>
-    </View>
-    // <NavigationContainer>
-    //   <Stack.Navigator initialRouteName="Home">
-    //     <Stack.Screen
-    //       name="Home"
-    //       component={Home}
-    //       options={{
-    //         headerTitle: () => <Text>Instagram</Text>,
-    //         headerRight: () => <MessengerButton />,
-    //       }}
-    //     />
-    //     <Stack.Screen name="Messages" component={Messages} />
-    //   </Stack.Navigator>
-    // </NavigationContainer>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{
+            headerTitle: () => <Text>Instagram</Text>,
+            headerRight: () => <MessengerButton />,
+          }}
+        />
+        <Stack.Screen name="Messages" component={Messages} />
+        <Stack.Screen name="Login" component={Login} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
